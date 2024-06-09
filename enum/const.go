@@ -1,7 +1,8 @@
 package enum
 
 const (
-	Normal   = ""
+	Normal   = "normal"
 	SyncPool = "syncpool"
 	GoCache  = "gocache"
+	FastHttp  = "fasthttp"
 )

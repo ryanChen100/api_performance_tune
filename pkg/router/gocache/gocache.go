@@ -1,6 +1,7 @@
 package gocache
 
 import (
+	"api/performance_tune/enum"
 	"api/performance_tune/model"
 	"net/http"
 	"time"
@@ -13,10 +14,10 @@ var cacheItme *cache.Cache
 
 func InitGoCacheRouter(r *gin.Engine) {
 	cacheItme = cache.New(5*time.Minute, 10*time.Minute)
-	r.GET("/gocache/items/:id", getItem)
-	r.POST("/gocache/items", createItem)
-	r.PUT("/gocache/items/:id", updateItem)
-	r.DELETE("/gocache/items/:id", deleteItem)
+	r.GET("/"+enum.GoCache+"/items/:id", getItem)
+	r.POST("/"+enum.GoCache+"/items", createItem)
+	r.PUT("/"+enum.GoCache+"/items/:id", updateItem)
+	r.DELETE("/"+enum.GoCache+"/items/:id", deleteItem)
 }
 
 func getItem(c *gin.Context) {
@@ -35,7 +36,7 @@ func getItem(c *gin.Context) {
 }
 
 func createItem(c *gin.Context) {
-	var item model.Item
+	var item *model.Item
 	if err := c.BindJSON(&item); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -48,7 +49,7 @@ func createItem(c *gin.Context) {
 
 func updateItem(c *gin.Context) {
 	id := c.Param("id")
-	var item model.Item
+	var item *model.Item
 	if err := c.BindJSON(&item); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return

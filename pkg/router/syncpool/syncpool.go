@@ -1,6 +1,7 @@
 package syncpool
 
 import (
+	"api/performance_tune/enum"
 	"api/performance_tune/model"
 	"net/http"
 	"sync"
@@ -15,10 +16,10 @@ var pool = sync.Pool{
 }
 
 func InitSyncPoolRouter(r *gin.Engine) {
-	r.GET("/syncpool/items/:id", getItem)
-	r.POST("/syncpool/items", createItem)
-	r.PUT("/syncpool/items/:id", updateItem)
-	r.DELETE("/syncpool/items/:id", deleteItem)
+	r.GET("/"+enum.SyncPool+"/items/:id", getItem)
+	r.POST("/"+enum.SyncPool+"/items", createItem)
+	r.PUT("/"+enum.SyncPool+"/items/:id", updateItem)
+	r.DELETE("/"+enum.SyncPool+"/items/:id", deleteItem)
 
 }
 

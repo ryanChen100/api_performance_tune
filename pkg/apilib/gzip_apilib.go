@@ -11,11 +11,11 @@ import (
 )
 
 var (
-	urlPrefix string = "http://" + config.GetTestSetting().RouterIp + ":" + config.GetTestSetting().GinPort + "/"
+	gzipUrlPrefix string = "http://" + config.GetTestSetting().RouterIp + ":" + config.GetTestSetting().GzipPort + "/"
 )
 
-func PostItem(routerName, id string) {
-	var url = urlPrefix + routerName + "/items"
+func GzipPostItem(routerName, id string) {
+	var url = gzipUrlPrefix + routerName + "/items"
 	b, marshalErr := json.Marshal(&model.Item{
 		ID:   id,
 		Name: "ryan" + id,
@@ -45,8 +45,8 @@ func PostItem(routerName, id string) {
 	// fmt.Printf("PostItem: response body: %s\n", resBody)
 }
 
-func GetItem(routerName, id string) {
-	var url = urlPrefix + routerName + "/items/" + id
+func GzipGetItem(routerName, id string) {
+	var url = gzipUrlPrefix + routerName + "/items/" + id
 
 	req, newRequestErr := http.NewRequest("GET", url, nil)
 	if newRequestErr != nil {
@@ -69,8 +69,8 @@ func GetItem(routerName, id string) {
 	// fmt.Printf("GetItem: response body: %s\n", resBody)
 }
 
-func PutItem(routerName, id string) {
-	var url = urlPrefix + routerName + "/items/" + id
+func GzipPutItem(routerName, id string) {
+	var url = gzipUrlPrefix + routerName + "/items/" + id
 	b, marshalErr := json.Marshal(&model.Item{
 		ID:   id,
 		Name: "ryanryan" + id,
@@ -101,8 +101,8 @@ func PutItem(routerName, id string) {
 	// fmt.Printf("PutItem: response body: %s\n", resBody)
 }
 
-func DeleteItem(routerName, id string) {
-	var url = urlPrefix + routerName + "/items/" + id
+func GzipDeleteItem(routerName, id string) {
+	var url = gzipUrlPrefix + routerName + "/items/" + id
 
 	req, newRequestErr := http.NewRequest("DELETE", url, nil)
 	if newRequestErr != nil {

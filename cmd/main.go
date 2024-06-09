@@ -7,5 +7,9 @@ import (
 
 func main() {
 	config.ConfigInit()
-	router.RouterAdmin()
+	go router.FastRouterAdmin()
+	go router.RouterAdmin()
+	go router.GzipRouterAdmin()
+	for {
+	}
 }

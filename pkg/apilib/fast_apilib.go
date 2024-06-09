@@ -11,11 +11,11 @@ import (
 )
 
 var (
-	urlPrefix string = "http://" + config.GetTestSetting().RouterIp + ":" + config.GetTestSetting().GinPort + "/"
+	fastUrlPrefix string = "http://" + config.GetTestSetting().RouterIp + ":" + config.GetTestSetting().FastPort + "/"
 )
 
-func PostItem(routerName, id string) {
-	var url = urlPrefix + routerName + "/items"
+func FastPostItem(routerName, id string) {
+	var url = fastUrlPrefix + routerName + "/items"
 	b, marshalErr := json.Marshal(&model.Item{
 		ID:   id,
 		Name: "ryan" + id,
@@ -45,8 +45,8 @@ func PostItem(routerName, id string) {
 	// fmt.Printf("PostItem: response body: %s\n", resBody)
 }
 
-func GetItem(routerName, id string) {
-	var url = urlPrefix + routerName + "/items/" + id
+func FastGetItem(routerName, id string) {
+	var url = fastUrlPrefix + routerName + "/items/" + id
 
 	req, newRequestErr := http.NewRequest("GET", url, nil)
 	if newRequestErr != nil {
@@ -69,8 +69,8 @@ func GetItem(routerName, id string) {
 	// fmt.Printf("GetItem: response body: %s\n", resBody)
 }
 
-func PutItem(routerName, id string) {
-	var url = urlPrefix + routerName + "/items/" + id
+func FastPutItem(routerName, id string) {
+	var url = fastUrlPrefix + routerName + "/items/" + id
 	b, marshalErr := json.Marshal(&model.Item{
 		ID:   id,
 		Name: "ryanryan" + id,
@@ -101,8 +101,8 @@ func PutItem(routerName, id string) {
 	// fmt.Printf("PutItem: response body: %s\n", resBody)
 }
 
-func DeleteItem(routerName, id string) {
-	var url = urlPrefix + routerName + "/items/" + id
+func FastDeleteItem(routerName, id string) {
+	var url = fastUrlPrefix + routerName + "/items/" + id
 
 	req, newRequestErr := http.NewRequest("DELETE", url, nil)
 	if newRequestErr != nil {

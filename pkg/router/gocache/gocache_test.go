@@ -3,11 +3,13 @@ package gocache
 import (
 	"api/performance_tune/enum"
 	"api/performance_tune/pkg/apilib"
+	"api/performance_tune/pkg/config"
 	"strconv"
 	"testing"
 )
 
 func TestGocache(t *testing.T) {
+	config.ConfigTestInit()
 	apilib.PostItem(enum.GoCache, "1")
 	apilib.GetItem(enum.GoCache, "1")
 	apilib.PutItem(enum.GoCache, "1")
@@ -16,8 +18,7 @@ func TestGocache(t *testing.T) {
 }
 
 func BenchmarkGocache(b *testing.B) {
-	// time.Sleep(10 * time.Second)
-	// b.ResetTimer()
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		id := strconv.Itoa(i)
 		apilib.PostItem(enum.GoCache, id)

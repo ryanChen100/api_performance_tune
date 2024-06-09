@@ -1,25 +1,26 @@
 package normal
 
 import (
+	"api/performance_tune/enum"
 	"api/performance_tune/model"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
-var items = map[string]model.Item{}
+var items = map[string]*model.Item{}
 
 func InitRouter(r *gin.Engine) {
-	items = make(map[string]model.Item)
-	r.GET("/items/:id", getItem)
-	r.POST("/items", createItem)
-	r.PUT("/items/:id", updateItem)
-	r.DELETE("/items/:id", deleteItem)
+	items = make(map[string]*model.Item)
+	r.GET("/"+enum.Normal+"/items/:id", getItem)
+	r.POST("/"+enum.Normal+"/items", createItem)
+	r.PUT("/"+enum.Normal+"/items/:id", updateItem)
+	r.DELETE("/"+enum.Normal+"/items/:id", deleteItem)
 }
 
 func getItem(c *gin.Context) {
 	id := c.Param("id")
-	if item, exists := items[id]; exists {
+	if item, exists := items[id]; exists && item != nil {
 		c.JSON(http.StatusOK, item)
 	} else {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Item not found"})
@@ -27,7 +28,7 @@ func getItem(c *gin.Context) {
 }
 
 func createItem(c *gin.Context) {
-	var item model.Item
+	var item *model.Item
 	if err := c.BindJSON(&item); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -38,7 +39,7 @@ func createItem(c *gin.Context) {
 
 func updateItem(c *gin.Context) {
 	id := c.Param("id")
-	var item model.Item
+	var item *model.Item
 	if err := c.BindJSON(&item); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return

@@ -1,1 +1,4 @@
-port: "8080"
+router_ip: "127.0.0.1"
+gin_port: "8080"
+fast_port: "8081"
+gzip_port: "8082"
